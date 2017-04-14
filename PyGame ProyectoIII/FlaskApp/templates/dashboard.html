@@ -1,0 +1,61 @@
+{%extends "header.html" %}
+
+{% block body %} 
+<div class="container" align="center">
+<div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#Origen" aria-controls="Origen" role="tab" data-toggle="tab">Origen</a></li>
+    <li role="presentation"><a href="#Destino" aria-controls="Destino" role="tab" data-toggle="tab">Destino</a></li>
+    <li role="presentation"><a href="#MDT" aria-controls="MDT" role="tab" data-toggle="tab">Medio de transporte</a></li>
+
+  </ul>
+
+  <!-- Tab panes -->
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="Origen">
+	<ul>
+	<h4>Seleccione el lugar del que se encuentre más cerca, ese será su punto de partida:</h4>
+	{% for origen in matriz ["Origen"]%}
+	
+	<li><a href="{{origen[1]}}">{{origen[0]}}</a></li>
+	
+	{% endfor %}
+	</ul>
+  </div>
+  
+  <div role="tabpanel" class="tab-pane fade" id="Destino">
+  <h4>Seleccione el destino turístico al cual desea ir:</h4>
+	<ul>
+		{% for destino in matriz ["Destino"]%}
+	
+			<li><a href="{{destino[1]}}">{{destino[0]}}</a></li>
+	
+		{% endfor %}
+	</ul>
+  </div>
+
+  <div role="tabpanel" class="tab-pane fade" id="MDT">
+  <h4>Muestra las mejores 5 rutas hacia el destino seleccionado usando el medio de transporte de su preferencia:</h4>
+	<ul>
+		{% for MDT in matriz ["Medio de Transporte"]%}
+	
+			<li><a href="{{MDT[1]}}">{{MDT[0]}}</a></li>
+	
+		{% endfor %}
+	</ul>
+  </div>
+
+</div>
+
+
+	{% if error %}
+			<p class="error"><strong>Error:</strong> {{ error }}</p>
+	{% endif %}
+
+
+</div>
+</div>
+
+{% endblock %}
