@@ -6,45 +6,27 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#Origen" aria-controls="Origen" role="tab" data-toggle="tab">Origen</a></li>
-    <li role="presentation"><a href="#Destino" aria-controls="Destino" role="tab" data-toggle="tab">Destino</a></li>
-    <li role="presentation"><a href="#MDT" aria-controls="MDT" role="tab" data-toggle="tab">Medio de transporte</a></li>
+    <li role="presentation" class="active"><a href="#Origen" aria-controls="Origen" role="tab" data-toggle="tab">Juego</a></li>
+    <li role="presentation"><a href="#Destino" aria-controls="Destino" role="tab" data-toggle="tab">Chat</a></li>
+    <li role="presentation"><a href="#MDT" aria-controls="MDT" role="tab" data-toggle="tab">Alta puntuación</a></li>
 
   </ul>
 
   <!-- Tab panes -->
 <div class="tab-content">
-  <div role="tabpanel" class="tab-pane fade in active" id="Origen">
-	<ul>
-	<h4>Seleccione el lugar del que se encuentre más cerca, ese será su punto de partida:</h4>
-	{% for origen in matriz ["Origen"]%}
-	
-	<li><a href="{{origen[1]}}">{{origen[0]}}</a></li>
-	
-	{% endfor %}
-	</ul>
+  <div role="tabpanel" class="tab-pane fade in active" id="Juego">
+	<h4>Juega pong:</h4>
+	<script src="../static/js/pong.js"></script>
   </div>
   
-  <div role="tabpanel" class="tab-pane fade" id="Destino">
-  <h4>Seleccione el destino turístico al cual desea ir:</h4>
-	<ul>
-		{% for destino in matriz ["Destino"]%}
+  <div role="tabpanel" class="tab-pane fade" id="Chat">
+  <h4>Chatea con tus amigos:</h4>
 	
-			<li><a href="{{destino[1]}}">{{destino[0]}}</a></li>
-	
-		{% endfor %}
-	</ul>
   </div>
 
-  <div role="tabpanel" class="tab-pane fade" id="MDT">
-  <h4>Muestra las mejores 5 rutas hacia el destino seleccionado usando el medio de transporte de su preferencia:</h4>
-	<ul>
-		{% for MDT in matriz ["Medio de Transporte"]%}
+  <div role="tabpanel" class="tab-pane fade" id="AP">
+  <h4>Muestra los  10 jugadores con puntuación más alta:</h4>
 	
-			<li><a href="{{MDT[1]}}">{{MDT[0]}}</a></li>
-	
-		{% endfor %}
-	</ul>
   </div>
 
 </div>
@@ -59,3 +41,11 @@
 </div>
 
 {% endblock %}
+
+<!--
+<html>
+  <head>
+    <script src="../static/js/pong.js"></script>
+  </head>
+  <body></body>
+</html> --> 

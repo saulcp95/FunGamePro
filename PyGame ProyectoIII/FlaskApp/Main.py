@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect
+from passlib.handlers.sha2_crypt import sha256_crypt
 import psycopg2, time
 
 hostname = 'localhost'
@@ -26,7 +27,7 @@ def homepage():
 @app.route('/dashboard/')
 def dashboard():
     if valores.usuarioActual != "":
-        return render_template("dashboard.html", matriz = matriz)
+        return render_template("dashboard.html")
     else:
         return redirect(url_for('login'))
 
@@ -66,7 +67,7 @@ def login():
             for row in cursor2:
                 salida2 += str(row[0])
 
-            if attempted_username == salida and attempted_password == salida2:
+            if attempted_username == salida and sha256_crypt.verify(attempted_password, salida2):
                 valores.usuarioActual = salida
                 return redirect((url_for('dashboard')))
             else:
@@ -87,11 +88,12 @@ def registro():
             username = request.form['username']
             email = request.form['email']
             password = request.form['password']
+            passwordEncrypt = sha256_crypt.encrypt(password)
             confirm = request.form['confirm']
             cursor = conn.cursor()
             if password == confirm:
                 cursor.execute("INSERT into usuario (nombre, email, password) values (%s, %s, %s)",
-                               [str(username), str(email), str(password)])
+                               [str(username), str(email), str(passwordEncrypt)])
                 conn.commit()
                 cursor.execute("SELECT nombre FROM usuario where nombre = (%s)", [request.form['username']])
                 for row in cursor:
